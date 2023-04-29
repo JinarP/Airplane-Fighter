@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: #0e5d54 !important;
+    background-color: #22ab9b;
     display: flex;
     align-items: center;
     font-size: 3rem;
@@ -57,16 +57,8 @@ body {
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: large;
     border:1px solid beige;
-    background: #305879;
+    background: rgba(47, 46, 46, 0.93);
     width: 25px;
     height: 25px;
     text-align: center;
-}
-
-#grid TR TD.airPlane {
-    background-color: #159d10 !important;
-}
-
-#grid TR TD.obstacle {
-    background-color: #573536 !important;
 }

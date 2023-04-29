@@ -1,5 +1,5 @@
 let score = 0;
-const size = 24;
+const size = 22;
 let speed;
 let airPlane = [{i: size - 2, j: size / 2}];
 let airPlaneLine = size - 2, airPlaneColumn = size/2;
@@ -37,7 +37,7 @@ function generateBoard() {
         for (let j = 0; j < size; ++j) {
             let element = line.insertCell(j);
             if (cell % 2 !== 0) {
-                element.style.background = "rgba(27,122,218,0.66)";
+                element.style.background = "rgb(47,47,47)";
             }
             ++cell;
             if (i === 0) {
@@ -54,7 +54,7 @@ function generateBoard() {
             }
         }
     }
-    grid.rows[size - 2].cells[size / 2].classList.add("airPlane");
+    grid.rows[size - 2].cells[size / 2].innerHTML = "🚀";
 }
 
 function moveDirection(buttonPressed) {
@@ -71,11 +71,11 @@ function moveAirPlane() {
     if (checkGameOver() === true) {
         return;
     }
-    grid.rows[airPlane[0].i].cells[airPlane[0].j].classList.remove("airPlane");
+    grid.rows[airPlane[0].i].cells[airPlane[0].j].innerHTML = "";
     airPlane.shift();
     airPlaneLine += lineDirection;
     airPlaneColumn += columnDirection;
-    grid.rows[airPlaneLine].cells[airPlaneColumn].classList.add("airPlane");
+    grid.rows[airPlaneLine].cells[airPlaneColumn].innerHTML = "🚀";
     airPlane.push({i: airPlaneLine, j: airPlaneColumn});
 
 }
@@ -88,14 +88,14 @@ function moveObstacle () {
         return;
     }
     for (let i = 0; i < obstacle.length; ++i) {
-        grid.rows[obstacle[i].obstacleLine].cells[obstacle[i].obstacleColumn].classList.remove("obstacle");
+        grid.rows[obstacle[i].obstacleLine].cells[obstacle[i].obstacleColumn].innerHTML = "";
         ++obstacle[i].obstacleLine;
         if (obstacle[i].obstacleLine === size - 1) {
             obstacle.splice(i, 1);
             ++score;
             document.getElementById("score").innerText = score;
         }
-        grid.rows[obstacle[i].obstacleLine].cells[obstacle[i].obstacleColumn].classList.add("obstacle");
+        grid.rows[obstacle[i].obstacleLine].cells[obstacle[i].obstacleColumn].innerHTML = "💥";
     }
 }
 
@@ -104,7 +104,7 @@ function createObstacle () {
    obstacle.push({obstacleLine: 1, obstacleColumn: randomColumn});
 }
 function checkGameOver() {
-    if (grid.rows[airPlaneLine].cells[airPlaneColumn].classList.contains("obstacle")) {
+    if (grid.rows[airPlaneLine].cells[airPlaneColumn].innerHTML === "💥") {
         document.getElementById("message").innerText = "GAME OVER";
         return true;
     }
